@@ -1,0 +1,13 @@
+{
+  "name": "coursework2",
+  "version": "1.0",
+  "description": "Server.js File",
+  "author": "Euan McDonald <wouldnt.youlike@toknow.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
