@@ -1,5 +1,8 @@
 pipeline {
     agent { dockerfile true }
+    environment {
+        DOCKER_CREDS = credentials('dockerUAndP')
+    }
     stages {
         stage('Test') {
             steps {
