@@ -16,7 +16,7 @@ node {
 	
 	docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
 
-        customImage.push("${env.BUILD_ID}")
+        customImage.push("${env.BUILD_NUMBER}")
 	customImage.push("latest")
     }
 }
