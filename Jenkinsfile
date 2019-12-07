@@ -10,13 +10,13 @@ pipeline {
     }
 }
 node {
-    checkout scm
+	checkout scm
 
-    docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
+	def customImage = docker.build("EMCDON210/coursework_2")
+	
+	docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
 
-        def customImage = docker.build("my-image:${env.BUILD_ID}")
-
-        customImage.push()
-		customImage.push("latest")
+        customImage.push("${env.BUILD_ID}")
+	customImage.push("latest")
     }
 }
