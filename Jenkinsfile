@@ -1,8 +1,5 @@
 pipeline {
     agent { dockerfile true }
-    environment {
-        DOCKER_CREDS = credentials('dockerUAndP')
-    }
     stages {
         stage('Test') {
             steps {
@@ -15,7 +12,7 @@ pipeline {
 node {
     checkout scm
 
-    docker.withRegistry('https://registry.hub.docker.com', 'gcr:[dockerUAndP]') {
+    docker.withRegistry('https://registry.hub.docker.com', 'gcr:dockerUAndP') {
 
         def customImage = docker.build("my-image:${env.BUILD_ID}")
 
