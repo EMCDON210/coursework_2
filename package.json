@@ -2,7 +2,7 @@
   "name": "coursework2",
   "version": "1.0",
   "description": "Server.js File",
-  "author": "Euan McDonald <wouldnt.youlike@toknow.com>",
+  "author": "Euan McDonald <emcdon210@caledonian.ac.uk>",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
