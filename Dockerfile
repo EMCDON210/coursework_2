@@ -14,5 +14,3 @@ COPY . .
 # expose port 8080
 EXPOSE 8080
 
-# run the server.js file in the container
-CMD [ "node", "server.js" ]
