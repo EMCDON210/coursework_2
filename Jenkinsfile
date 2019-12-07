@@ -12,7 +12,7 @@ pipeline {
 node {
     checkout scm
 
-    docker.withRegistry('https://registry.hub.docker.com', 'gcr:dockerUAndP') {
+    docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
 
         def customImage = docker.build("my-image:${env.BUILD_ID}")
 
