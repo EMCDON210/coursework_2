@@ -12,7 +12,7 @@ pipeline {
 node {
     checkout scm
 
-	def customImage = docker.build("emcdon210/coursework_2")
+	def customImage = docker.build("emcd99/coursework_2")
 	
     docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
 
