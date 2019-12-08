@@ -14,9 +14,8 @@ node {
 
 	def customImage = docker.build("emcd99/coursework_2")
 	
-    docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
+	docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
 
-        customImage.push("${env.BUILD_ID}")
-		customImage.push("latest")
+        customImage.push("V${env.BUILD_ID}")
     }
 }
