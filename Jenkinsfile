@@ -9,10 +9,10 @@ pipeline {
     }
 }
 node {
-
+	def customImage
     stage('Build The Image') {
 	    checkout scm
-        def customImage = docker.build("emcd99/coursework_2")
+		customImage = docker.build("emcd99/coursework_2")
 	}
 	
     stage('Sonarqube') {
