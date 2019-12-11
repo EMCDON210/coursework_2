@@ -1,28 +1,28 @@
 pipeline {
     agent { dockerfile true }
-    stages {
-        stage('Sonarqube') {
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
-            }
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-                timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-    }
 }
 node {
-    checkout scm
 
+    stage('Build The Image') {
+	    checkout scm
         def customImage = docker.build("emcd99/coursework_2")
+	}
+	
+    stage('Sonarqube') {
+        script {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        withSonarQubeEnv('SonarQube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+            timeout(time: 10, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+        }
+    }
 
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
-
-        customImage.push("V${env.BUILD_ID}")
+    stage('Push To Docker Hub') {
+		docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
+		    customImage.push("V${env.BUILD_ID}")
+		}
     }
 }
