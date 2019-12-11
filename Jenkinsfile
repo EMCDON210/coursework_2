@@ -3,10 +3,10 @@ pipeline {
     stages {
         stage('Sonarqube') {
             environment {
-                scannerHome = tool 'SonarQube'
+                scannerHome = tool 'SonarQubeScanner'
             }
             steps {
-                withSonarQubeEnv('sonarqube') {
+                withSonarQubeEnv('SonarQube') {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
@@ -19,9 +19,9 @@ pipeline {
 node {
     checkout scm
 
-	def customImage = docker.build("emcd99/coursework_2")
-	
-	docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
+        def customImage = docker.build("emcd99/coursework_2")
+
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
 
         customImage.push("V${env.BUILD_ID}")
     }
