@@ -1,12 +1,19 @@
 pipeline {
     agent { dockerfile true }
     stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-                sh 'svn --version'
-            }
-        }
+        stage('Sonarqube') {
+			environment {
+				scannerHome = tool 'SonarQube'
+			}
+			steps {
+				withSonarQubeEnv('sonarqube') {
+					sh "${scannerHome}/bin/sonar-scanner"
+				}
+				timeout(time: 10, unit: 'MINUTES') {
+					waitForQualityGate abortPipeline: true
+				}
+			}
+		}
     }
 }
 node {
