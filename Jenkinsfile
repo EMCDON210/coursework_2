@@ -33,4 +33,7 @@ node {
                     customImage.push("LatestBuild")
 		}
     }
+    stage('Update Kubernetes') {
+        ssh azureuser@40.85.164.246 kubectl set image deployments/emcd99-coursework2 emcd99-coursework2=emcd99/coursework2:LatestBuild
+    }
 }
