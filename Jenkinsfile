@@ -34,6 +34,6 @@ node {
 		}
     }
     stage('Update Kubernetes') {
-        sh "ssh azureuser@40.85.164.246 kubectl set image deployment/emcd99-coursework2 emcd99-coursework2=emcd99/coursework2:V${env.BUILD_ID}"
+        sh "ssh azureuser@40.85.164.246 kubectl set image deployment/coursework2 coursework2=emcd99/coursework2:V${env.BUILD_ID}"
     }
 }
