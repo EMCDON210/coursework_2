@@ -12,7 +12,7 @@ node {
 	def customImage
     stage('Build The Image') {
 	    checkout scm
-		customImage = docker.build("emcd99/coursework_2")
+		customImage = docker.build("emcd99/coursework2")
 	}
 	
     stage('Sonarqube') {
