@@ -30,6 +30,7 @@ node {
     stage('Push To Docker Hub') {
 		docker.withRegistry('https://registry.hub.docker.com', 'dockerUAndP') {
 		    customImage.push("V${env.BUILD_ID}")
+                    customImage.push("LatestBuild")
 		}
     }
 }
