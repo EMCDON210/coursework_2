@@ -12,4 +12,4 @@
     command: minikube start --vm-driver=virtualbox
 
   - name: create deployment
-    command: kubectl create deployment emcd99-coursework2 --image=emcd99/coursework2:LatestBuild
+    command: kubectl create deployment coursework2 --image=emcd99/coursework2:LatestBuild
