@@ -1,0 +1,52 @@
+- name: Configure Node VM
+  hosts: azure
+  user: azureuser
+  become: yes
+
+  vars:
+    myResourceGroup: kubernetes
+    myVM: production-node
+
+  tasks:
+  - name: Install apt https transport
+    apt:
+      update_cache: yes
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - apt-transport-https
+  - name: create ap-key for Kubernetes
+    apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      state: present
+  - name: geting apt repository for Kubernetes
+    apt_repository:
+      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: kubernetes.list
+  - name: Install kubectl
+    apt:
+      update_cache: yes
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - kubectl
+  - name: Check that the installation was successful  
+    command: kubectl version
+  - name: create ap-key for virtualbox
+    apt_key:
+      url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+      state: present
+  - name: Install virtualbox
+    apt:
+      update_cache: yes
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - virtualbox
+  - name: geting apt repository for minikube
+    command: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  - name: Set minikube permissions
+    command: chmod +x minikube  
+  - name: Move the minikube file to the users bin folder
+    command: sudo mv minikube /usr/local/bin/  
